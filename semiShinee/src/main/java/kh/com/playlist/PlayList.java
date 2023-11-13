@@ -1,9 +1,13 @@
 package kh.com.playlist;
 
+import java.sql.Blob;
+
+import javax.servlet.http.Part;
+
 public class PlayList {
 	public int playlistId;
 	private String playlistName;
-	
+
 	public PlayList(int playlistId, String playlistName) {
 		this.playlistId = playlistId;
 		this.playlistName = playlistName;

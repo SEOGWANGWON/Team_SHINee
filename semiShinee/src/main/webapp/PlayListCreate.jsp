@@ -36,47 +36,36 @@
                 <button id="backToList"><a href="playList.jsp">Back To PlayList</a></button>
                 
                 </div>
+              
                 <article id="create">
-                    
-                    <div style="text-align: center; margin-top: 5%;">
-                        <label for = "pl_name" style="font-size: 20px;">PlayList_Name : </label> 
-                        <textarea id="ListPost" placeholder="플레이리스트 이름 생성" style="width:350px;"></textarea>
-                        
-                        <!--이미지, 이름 설정 생성버튼-->
+                  
+                <div style="text-align: center; margin-top: 5%;">
+           <form action="UploadServlet" method="post" enctype="multipart/form-data">  
+                       
+                        <label for = "title" style="font-size: 20px;">PlayList_Name : </label> 
+                        <input type="text" name = "title" required>
+                      
                         <br><br><br><br><br>
                         <p style="text-align: center;">플레이리스트 대표사진 </p>
                         
-                        <div id="imageContainer" >
-                            <!--이미지 표시할 컨테이너-->
-                            <img id = "uploadImage" style="max-width: 250px; max-height: 250px; margin-top: 10px;">
-                        </div> 
-                        <input type="file" id="fileInput" accept="image/*">
-                        <button id = "uploadButton">사진 업로드</button>
+                       
+                        <label for ="image">이미지 : </label>
+						<input type="file" name="image" id="image" required><br>
+                       
+                        
                         <br>
-                        <button id="saveButton" style="margin-top: 20%;">생성하기</button>  
+                        <button id = "saveButton" type = "submit" style="margin-top: 20%;">생성하기</button>  
+                   </form>
                     </div>
                 </article>
+            
             </section>
 
         </div><!--container-->
         <script>
-            document.getElementById("uploadButton").addEventListener("click",function(){
-                var fileInput = document.getElementById("fileInput");
-                var uploadImage = document.getElementById("uploadImage");
-                var imageContainer=document.getElementById("imageContainer");
-
-                if(fileInput.files.length >0){
-                    var file=fileInput.files[0];
-                    var reader = new FileReader();
-                    reader.onload=function(e){
-                        uploadImage.src = e.target.result;
-                        imageContainer.style.display="block"
-                    };
-                    reader.readAsDataURL(file);
-                }else{
-                    alert("이미지 파일을 선택하세요");
-                }
-            });            
+          
+            
+            //생성하기 버튼 스크립트
             document.getElementById("saveButton").addEventListener("click", function(){
                 const playlistContent = document.getElementById("ListPost").value;
                 if(playlistContent.trim() !==""){
@@ -96,6 +85,7 @@
                     alert("플레이리스트 내용을 다시 입력해주세요.");
                 }
             });
+            
         </script>
     </body>
 </html>

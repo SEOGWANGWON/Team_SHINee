@@ -42,11 +42,13 @@
             <article id="articleP">
                     <div style="text-align: center; margin-top: 0%;">
                     
-<h1>노래 목록</h1>
+
 <%
 	//String=id 값을 가져오겠다.
 	String playlistIdValue = request.getParameter("playlistId");
 	int playlistId = Integer.parseInt(playlistIdValue);
+	
+
 	
 	//DAO작업
 	
@@ -54,8 +56,14 @@
 	PlayList playlist = playlistDAO.getPlaylistID(playlistId);
 	
 %>
+<h2>  <%=playlist.getPlaylistName() %> </h2>
+
 <p>플레이리스트 id : <%=playlist.getPlaylistId() %>
-<p>플레이리스트 제목 : <%=playlist.getPlaylistName() %>
+<p> 노래들 : </p>
+
+
+
+
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package kh.com.playlist;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,7 +40,11 @@ public class PlayListServlet extends HttpServlet {
 			while(resultSet.next()) {
 				int playlistId = resultSet.getInt("playlist_id");
 				String playlistName = resultSet.getString("playlist_name");
+				Blob blob = resultSet.getBlob("image");
+				byte[] imageData = blob.getBytes(1,(int)blob.length());
 				
+				response.setContentType("image/jpg");
+				response.getOutputStream().write(imageData);
 				PlayList playlist = new PlayList(playlistId, playlistName);
 				//하나씩 add해서 넣어줌
 				playlistList.add(playlist);

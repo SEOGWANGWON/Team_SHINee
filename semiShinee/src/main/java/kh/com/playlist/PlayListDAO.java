@@ -1,5 +1,7 @@
 package kh.com.playlist;
 
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.Part;
 
 public class PlayListDAO {
 	private static final String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -34,6 +38,7 @@ public class PlayListDAO {
 				int playlistId = resultSet.getInt("playlist_id");
 				String playlistName = resultSet.getString("playlist_name");
 				
+				
 				PlayList playlist = new PlayList(playlistId, playlistName);
 				playlists.add(playlist);
 			}
@@ -56,10 +61,12 @@ public class PlayListDAO {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1,playlistId);
 			ResultSet resultSet = ps.executeQuery();
+			
 			//new playlist 이용해서 값 가져오기
 			if(resultSet.next()) {
 				playlistId = resultSet.getInt("playlist_id");
 				String playlistName = resultSet.getString("playlist_name");
+				
 				
 				playlist = new PlayList(playlistId, playlistName);
 			}
@@ -70,5 +77,6 @@ public class PlayListDAO {
 		
 		return playlist;
 	}
+	
 
 }

@@ -51,7 +51,8 @@
 		<tr>
 			<th></th>
 			<th></th>
-			<th> </th>
+			<th></th>
+			<th></th>
 			
 		</tr>
 	</table>
@@ -61,12 +62,19 @@
 		
 		for(PlayList p : playlists){
 			%>
+			<form action="DeleteServlet" method="post" enctype="multipart/form-data">
 			<tr>
-				<td><a href = "playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><%=p.getPlaylistId() %>"</a></td>
+				<td ><a href = "playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><%=p.getPlaylistId() %>"</a></td>
+				<td style = "border: 1px solid ""><img alt="" src="ImageServlet?image_id=${p.getPlaylistId()} "style="width : 150px; height: 150px;"></td>
 				<td><%=p.getPlaylistName() %></td>
-				<td><button class = "btn btn-default pull right" type=button" onclick="getPlaylist_name">X</button></td>
+				<td>
+				  
+				    <input type="hidden" name="playlistId" value="<%= p.getPlaylistId() %>">
+				    <button type="submit" class="btn btn-default pull right">삭제하기</button>
+				  </td>
 			</tr>
 			<br>
+			</form>
 			<%
 			
 		}
@@ -86,15 +94,13 @@
                 List.appendChild(listItem);
   
             });
-            
 
             document.getElementById("new").addEventListener("click",function(){
                 window.location.href="PlayListCreate.jsp";
             });
             
-            function
             
         </script>
-
+</div>
 </body>
 </html>
