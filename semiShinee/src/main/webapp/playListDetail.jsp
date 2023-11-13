@@ -35,7 +35,7 @@
                     <p style="margin-top:5px;" ><img src="./img/Save.png" style="height: 28px; float: left; margin-top: -8px; "><strong>My_PlayList</strong></p>
                 </div>
                 <div style="width:1200px; height:30px; background-color: gray;">
-                <button id="new">NEW</button>
+                <button id="backToList"><a href="playList.jsp">Back</a></button>
                 
                 
             </div>

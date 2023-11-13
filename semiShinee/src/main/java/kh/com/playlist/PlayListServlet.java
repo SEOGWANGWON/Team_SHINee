@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class PlayListServlet
- */
+
 @WebServlet("/PlayListServlet")
 public class PlayListServlet extends HttpServlet {
 	private static final String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";

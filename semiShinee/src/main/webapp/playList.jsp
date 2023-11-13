@@ -39,22 +39,20 @@
                     <p style="margin-top:5px;" ><img src="./img/Save.png" style="height: 28px; float: left; margin-top: -8px; "><strong>My_PlayList</strong></p>
                 </div>
                 <div style="width:1200px; height:30px; background-color: gray;">
-                <button id="new">NEW</button>
+                <button id="new"><a href="PlayListCreate.jsp">NEW</a></button>
                 
                 
             </div>
                 <article id="articleP">
                 <div style="text-align: center; margin-top: 0%;">
                 </div>
-                
-                </article>
-                </section>
-                    
-	<h1>내 플레이리스트 목록</h1>
-	<table border = "1">
+         
+                <table border = "0">
 		<tr>
-			<th>플레이리스트 id</th>
-			<th>플레이리스트 제목</th>
+			<th></th>
+			<th></th>
+			<th> </th>
+			
 		</tr>
 	</table>
 	<%
@@ -66,12 +64,18 @@
 			<tr>
 				<td><a href = "playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><%=p.getPlaylistId() %>"</a></td>
 				<td><%=p.getPlaylistName() %></td>
+				<td><button class = "btn btn-default pull right" type=button" onclick="getPlaylist_name">X</button></td>
 			</tr>
+			<br>
 			<%
 			
 		}
 	
 	%>
+                </article>
+                </section>
+                    
+	
 	 <script>
             const List = document.getElementById("List");
             const savedPosts = JSON.parse(localStorage.getItem("ListPosts")) || [];
@@ -87,6 +91,9 @@
             document.getElementById("new").addEventListener("click",function(){
                 window.location.href="PlayListCreate.jsp";
             });
+            
+            function
+            
         </script>
 
 </body>

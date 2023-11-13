@@ -30,10 +30,10 @@
             </aside>
             <section>
                 <div class="bluetop" style="margin-top:20px; width:1200px;">
-                    <p style="margin-top:5px;" ><img src="./img/Old_cd.png" style="height: 28px; float: left; margin-top: -8px; "><strong>My_PlayList</strong></p>
+                    <p style="margin-top:5px;" ><img src="./img/Save.png" style="height: 28px; float: left; margin-top: -8px; "><strong>My_PlayList</strong></p>
                 </div>
                 <div style="width:1200px; height:30px; background-color: gray;">
-                <button id="backToList"><a href="./exPlaylist.html">Back To PlayList</a></button>
+                <button id="backToList"><a href="playList.jsp">Back To PlayList</a></button>
                 
                 </div>
                 <article id="create">
