@@ -12,17 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.com.playlist.PlayList;
 import kh.com.playlist.PlayListDAO;
 
 @WebServlet("/DeleteServlet")
 public class DeleteServlet extends HttpServlet {
-
+	private static final String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
+	private static final String jdbcUser="shinee";
+	private static final String jdbcPW="shinee";
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String jdbcURL="jdbc:oracle:thin:@localhost:1521:xe";
-		String jdbcUser ="shinee";
-		String jdbcPW = "shinee";
 		
-		int playlistId = Integer.parseInt(request.getParameter("playlistId"));
+		int playlistId =Integer.parseInt(request.getParameter("playlistId"));
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -32,9 +33,10 @@ public class DeleteServlet extends HttpServlet {
 		}
 		try {
 			Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPW);
-			String sql = "DELETE FROM playlist_song WHERE playlist_id = ?";
+			String sql = "DELETE FROM playlist_info WHERE playlist_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1,playlistId);
+			
 			int rowsDeleted = ps.executeUpdate();
 			if (rowsDeleted >0) {
 				System.out.println("플레이리스트 삭제 됨");

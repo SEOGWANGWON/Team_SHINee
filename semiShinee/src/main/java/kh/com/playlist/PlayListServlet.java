@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +31,7 @@ public class PlayListServlet extends HttpServlet {
 			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
 			
 			//SQLÄõ¸®
-			String sql = "SELECT * FROM playlist_song";
+			String sql = "SELECT * FROM playlist_info";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet resultSet = ps.executeQuery();
 			
@@ -40,12 +41,15 @@ public class PlayListServlet extends HttpServlet {
 			while(resultSet.next()) {
 				int playlistId = resultSet.getInt("playlist_id");
 				String playlistName = resultSet.getString("playlist_name");
-				Blob blob = resultSet.getBlob("image");
-				byte[] imageData = blob.getBytes(1,(int)blob.length());
+				String user_id = resultSet.getString("user_id");
+				Blob Image = resultSet.getBlob("image");
+				byte[] imageData = Image.getBytes(1,(int)Image.length());
+				String imageBase64 = Base64.getEncoder().encodeToString(imageData);
+				String image = "data:image/jpeg;base64," + imageBase64;
 				
-				response.setContentType("image/jpg");
+				response.setContentType("image/jpeg");
 				response.getOutputStream().write(imageData);
-				PlayList playlist = new PlayList(playlistId, playlistName);
+				PlayList playlist = new PlayList(playlistId, playlistName, user_id, image);
 				//ÇÏ³ª¾¿ addÇØ¼­ ³Ö¾îÁÜ
 				playlistList.add(playlist);
 				

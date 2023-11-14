@@ -42,12 +42,13 @@
                 <button id="new"><a href="PlayListCreate.jsp">NEW</a></button>
                 
                 
+                
             </div>
                 <article id="articleP">
                 <div style="text-align: center; margin-top: 0%;">
                 </div>
          
-                <table border = "0">
+                <table>
 		<tr>
 			<th></th>
 			<th></th>
@@ -62,19 +63,22 @@
 		
 		for(PlayList p : playlists){
 			%>
-			<form action="DeleteServlet" method="post" enctype="multipart/form-data">
+			<div style="background-color : gray;">
+			<form action="DeleteServlet" method="post">
 			<tr>
-				<td ><a href = "playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><%=p.getPlaylistId() %>"</a></td>
-				<td style = "border: 1px solid ""><img alt="" src="ImageServlet?image_id=${p.getPlaylistId()} "style="width : 150px; height: 150px;"></td>
+				<td></td>
+
+				<td><a href="playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><img src="<%=p.getImage()%>"style="width : 150px; height: 150px;"></a></td>
+
 				<td><%=p.getPlaylistName() %></td>
 				<td>
-				  
 				    <input type="hidden" name="playlistId" value="<%= p.getPlaylistId() %>">
-				    <button type="submit" class="btn btn-default pull right">삭제하기</button>
+				    <button  type="submit" class="btn btn-default pull right">삭제하기</button>
 				  </td>
 			</tr>
 			<br>
 			</form>
+			</div>
 			<%
 			
 		}

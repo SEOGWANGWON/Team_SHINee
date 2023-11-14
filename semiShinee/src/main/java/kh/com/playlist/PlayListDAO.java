@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.Part;
@@ -30,16 +31,22 @@ public class PlayListDAO {
 		
 		try {
 			Connection connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-			String sql = "SELECT * FROM playlist_song";
+			String sql = "SELECT * FROM playlist_info";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet resultSet = ps.executeQuery();
 			
 			while(resultSet.next()) {
 				int playlistId = resultSet.getInt("playlist_id");
 				String playlistName = resultSet.getString("playlist_name");
+				String user_id = resultSet.getString("user_id");
+				Blob Image = resultSet.getBlob("image");
+				byte[] imageData = Image.getBytes(1, (int) Image.length());
+				String imageBase64 = Base64.getEncoder().encodeToString(imageData);
+				String image = "data:image/jpeg;base64," + imageBase64;
 				
 				
-				PlayList playlist = new PlayList(playlistId, playlistName);
+			    
+				PlayList playlist = new PlayList(playlistId,playlistName,user_id,image);
 				playlists.add(playlist);
 			}
 
@@ -57,8 +64,9 @@ public class PlayListDAO {
 		Connection connection;
 		try {
 			connection =DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-			String sql = "SELECT * FROM playlist_song WHERE playlist_id = ?";
+			String sql = "SELECT * FROM playlist_info WHERE playlist_id=?";
 			PreparedStatement ps = connection.prepareStatement(sql);
+			
 			ps.setInt(1,playlistId);
 			ResultSet resultSet = ps.executeQuery();
 			
@@ -66,9 +74,12 @@ public class PlayListDAO {
 			if(resultSet.next()) {
 				playlistId = resultSet.getInt("playlist_id");
 				String playlistName = resultSet.getString("playlist_name");
-				
-				
-				playlist = new PlayList(playlistId, playlistName);
+				String user_id = resultSet.getString("user_id");
+				Blob Image = resultSet.getBlob("Image");
+				byte[] imageData = Image.getBytes(1, (int) Image.length());
+				String imageBase64 = Base64.getEncoder().encodeToString(imageData);
+				String image = "data:image/jpeg;base64," + imageBase64;
+				playlist = new PlayList(playlistId, playlistName,user_id,image);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -77,6 +88,9 @@ public class PlayListDAO {
 		
 		return playlist;
 	}
+
+	
+
 	
 
 }

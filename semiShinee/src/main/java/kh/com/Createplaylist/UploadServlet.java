@@ -33,6 +33,7 @@ public class UploadServlet extends HttpServlet {
 		String jdbcPW = "shinee";
 		
 		String title = request.getParameter("title");
+		String user_id = "im2ho"; //임시로 고정값 넣어둠. 로그인 서블릿 받아오면 세션에서 값 얻어와야함
 		Part imagePart = request.getPart("image");
 		
 		try {
@@ -43,13 +44,14 @@ public class UploadServlet extends HttpServlet {
 		}
 		try {
 			Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPW);
-			String sql = "INSERT INTO playlist_song(playlist_id,playlist_name,image) "+
-			"VALUES(playlist_seq.nextval,?,?)";
+			String sql = "INSERT INTO playlist_info(playlist_id,playlist_name,user_id,image)"+
+			"VALUES(playlist_seq.nextval,?,?,?)";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			ps.setString(1, title);
-			ps.setBinaryStream(2, imagePart.getInputStream(),(int) imagePart.getSize());
+			ps.setString(2, user_id);
+			ps.setBinaryStream(3, imagePart.getInputStream(),(int) imagePart.getSize());
 			
 			ps.executeUpdate();
 		} catch (SQLException e) {
