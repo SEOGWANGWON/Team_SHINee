@@ -42,7 +42,7 @@
                 <article id="create">
                   
                 <div style="text-align: center; margin-top: 5%;">
-           <form action="UploadServlet" method="post" enctype="multipart/form-data">  
+           		<form action="UploadServlet" method="post" enctype="multipart/form-data">  
                         <label for = "PlaylistID"></label>
                         <label for = "title" style="font-size: 20px;">PlayList_Name : </label> 
                         <input type="text" name = "title" required>

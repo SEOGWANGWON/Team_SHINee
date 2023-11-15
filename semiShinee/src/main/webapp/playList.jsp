@@ -66,18 +66,34 @@
 		
 		for(PlayList p : playlists){
 			%>
-			<div style="background-color : gray;">
 			<form action="DeleteServlet" method="post">
 			<tr>
+			<div class="window" style="width: 600px; height:200px; float: left; margin-left: 20%; margin-bottom: 5px; margin-top:10px;">
+			<div class="title-bar">
+				<div class="title-bar-text" style="margin-left:5px;">
+				 MY_PlayList_♡ 
+				<td><%=p.getPlaylistId() %></td>
+				</div>
+				<div class="title-bar-controls">
+				<input type="hidden" name="playlistId" value="<%= p.getPlaylistId() %>">
+				<button type="submit" class="btn btn-default pull right">X</button>
+										
+										
+				</div></div>
+	
 				<td></td>
 
-				<td><a href="playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><img src="<%=p.getImage()%>"style="width : 150px; height: 150px;"></a></td>
-
-				<td><%=p.getPlaylistName() %></td>
+				<td><a href="playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><img src="<%=p.getImage()%>"style="width : 150px; height: 150px; margin-left:10px; margin-top:10px; border: 2px inset gray;"></a></td>
+				
 				<td>
-				    <input type="hidden" name="playlistId" value="<%= p.getPlaylistId() %>">
-				    <button  type="submit" class="btn btn-default pull right">삭제하기</button>
-				  </td>
+				<div style="float:right; width: 300px; text-align: left;">
+				<div style="margin-top:20px; width:200px; height: 30px;">
+				<p><%=p.getPlaylistName()%></p></div></div>
+				</td>
+				
+				
+				
+				
 			</tr>
 			<br>
 			</form>
