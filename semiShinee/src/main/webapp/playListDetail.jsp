@@ -3,6 +3,9 @@
     <% request.setCharacterEncoding("UTF-8"); %>
     <%@page import ="kh.com.playlist.PlayList" %>
     <%@page import = "kh.com.playlist.PlayListDAO" %>
+    <%@ page import = "shinee.search.SearchDAO" %>
+	<%@ page import = "shinee.search.Music_info" %>
+	<%@ page import = "shinee.search.Playlist_info" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +30,7 @@
                     <p><strong>My<br>PlayList</strong></p>
                 </button>
                
-                  </button>
+                  
 
             </aside>
             <section>
@@ -72,8 +75,37 @@
 
 
 
-</article>
-</section>
-</div>
+				</article>
+			</section>
+		</div>
+		<script>
+			//검색버튼 누르면 검색 창으로 이동 (기본 음악검색)
+			document.getElementById("gotoSearchButton").addEventListener("click",()=>{
+				window.location.href = "music_search.jsp";
+			});
+			
+			//마이페이지 버튼 누르면 이동
+			document.getElementById("gotoMyPageButton").addEventListener("click",()=>{
+				window.location.href = "myPage.jsp";
+			});
+			
+			//마이플레이리스트 버튼
+			document.getElementById("gotoMyPlaylistButton").addEventListener("click",()=>{
+				window.location.href = "playList.jsp";
+			});
+			
+			//검색 카테고리 이동 버튼
+			document.getElementById("music_searchButton").addEventListener("click",()=>{
+				window.location.href = "music_search.jsp";
+			});
+			
+			document.getElementById("playlist_searchButton").addEventListener("click",()=>{
+				window.location.href = "playlist_search.jsp";
+			});
+			
+			document.getElementById("user_searchButton").addEventListener("click",()=>{
+				window.location.href = "user_search.jsp";
+			});
+			</script>
 </body>
 </html>

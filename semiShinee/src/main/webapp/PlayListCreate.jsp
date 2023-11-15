@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <% request.setCharacterEncoding("UTF-8"); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "shinee.search.SearchDAO" %>
+<%@ page import = "shinee.search.Music_info" %>
+<%@ page import = "shinee.search.Playlist_info" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +27,7 @@
                     <p><strong>My<br>PlayList</strong></p>
                 </button>
                
-                  </button>
+                  
 
             </aside>
             <section>
@@ -41,14 +43,14 @@
                   
                 <div style="text-align: center; margin-top: 5%;">
            <form action="UploadServlet" method="post" enctype="multipart/form-data">  
-                        <label for = "PlaylistID">
+                        <label for = "PlaylistID"></label>
                         <label for = "title" style="font-size: 20px;">PlayList_Name : </label> 
                         <input type="text" name = "title" required>
                       
                         <br><br><br><br><br>
                         <p style="text-align: center;">플레이리스트 대표사진 </p>
                         
-                       
+                       <br>
                         <label for ="image">이미지 : </label>
 						<input type="file" name="image" id="image" required><br>
                        
@@ -85,7 +87,33 @@
                     alert("플레이리스트 내용을 다시 입력해주세요.");
                 }
             });
-            
+        	//검색버튼 누르면 검색 창으로 이동 (기본 음악검색)
+			document.getElementById("gotoSearchButton").addEventListener("click",()=>{
+				window.location.href = "music_search.jsp";
+			});
+			
+			//마이페이지 버튼 누르면 이동
+			document.getElementById("gotoMyPageButton").addEventListener("click",()=>{
+				window.location.href = "myPage.jsp";
+			});
+			
+			//마이플레이리스트 버튼
+			document.getElementById("gotoMyPlaylistButton").addEventListener("click",()=>{
+				window.location.href = "playList.jsp";
+			});
+			
+			//검색 카테고리 이동 버튼
+			document.getElementById("music_searchButton").addEventListener("click",()=>{
+				window.location.href = "music_search.jsp";
+			});
+			
+			document.getElementById("playlist_searchButton").addEventListener("click",()=>{
+				window.location.href = "playlist_search.jsp";
+			});
+			
+			document.getElementById("user_searchButton").addEventListener("click",()=>{
+				window.location.href = "user_search.jsp";
+			});
         </script>
     </body>
 </html>
