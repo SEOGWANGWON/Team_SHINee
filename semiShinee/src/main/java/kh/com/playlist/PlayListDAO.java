@@ -31,7 +31,7 @@ public class PlayListDAO {
 		
 		try {
 			Connection connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-			String sql = "SELECT * FROM playlist_info";
+			String sql = "SELECT * FROM playlist_info ORDER BY playlist_id DESC";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet resultSet = ps.executeQuery();
 			

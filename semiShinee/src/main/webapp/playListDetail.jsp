@@ -66,9 +66,11 @@
 				PlayList playlist = playlistDAO.getPlaylistID(playlistId);
 				
 			%>
+			<form>
 			<h2 style="text-align: center; "><%=playlist.getPlaylistName() %> </h2>
 			<br>
 			<img src = "<%=playlist.getImage()%>" style="width:200px; height: 200px; margin-left:42%;">
+			</form>
 			<br>
 			
 			<p style="text-align: center;"> 노래들 : </p>

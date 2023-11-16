@@ -76,7 +76,7 @@
 				</div>
 				<div class="title-bar-controls">
 				<input type="hidden" name="playlistId" value="<%= p.getPlaylistId() %>">
-				<button type="submit" class="btn btn-default pull right">X</button>
+				<button type="submit" class="btn btn-default pull right"  onclick="DeleteCheck()">X</button>
 										
 										
 				</div></div>
@@ -151,6 +151,31 @@
 			document.getElementById("user_searchButton").addEventListener("click",()=>{
 				window.location.href = "user_search.jsp";
 			});
+			
+			function DeleteCheck(){
+				if(!confirm("이 플레이리스트를 삭제 하시겠습니까?")){
+					event.preventDefault();
+					return false;
+				}else{
+					
+					alert("선택하신 플레이리스트가 삭제 되었습니다.")
+					return true;
+					
+					/*
+					var btn = document.getElementsByClassName("btn btn-default pull right");
+					btn.submit();  이건 안써도됨
+					*/
+				};
+				
+			};
+			
+			
+			
+				
+				
+				
+			
+			
         </script>
        
 </div>
