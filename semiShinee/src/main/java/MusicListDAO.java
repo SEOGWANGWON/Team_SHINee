@@ -36,11 +36,12 @@ public class MusicListDAO {
 			ResultSet resultSet = ps.executeQuery();
 			
 			while(resultSet.next()) {
-				playlistId = resultSet.getInt("playlist_id");
+				int playlist_Id = resultSet.getInt("playlist_id");
 				String title = resultSet.getString("song_name");
 				String artist = resultSet.getString("artist_name");
 				
-				musiclist = new MusicList(playlistId,title,artist);
+				musiclist = new MusicList(playlist_Id,title,artist);
+				musiclists.add(musiclist);
 			}
 			
 		} catch (SQLException e) {
