@@ -79,6 +79,7 @@ public class PlayListDAO {
 				byte[] imageData = Image.getBytes(1, (int) Image.length());
 				String imageBase64 = Base64.getEncoder().encodeToString(imageData);
 				String image = "data:image/jpeg;base64," + imageBase64;
+				
 				playlist = new PlayList(playlistId, playlistName,user_id,image);
 			}
 		} catch (SQLException e) {

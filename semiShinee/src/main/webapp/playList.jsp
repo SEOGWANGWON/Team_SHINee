@@ -83,12 +83,12 @@
 	
 				<td></td>
 
-				<td><a href="playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><img src="<%=p.getImage()%>"style="width : 150px; height: 150px; margin-left:10px; margin-top:10px; border: 2px inset gray;"></a></td>
+				<td><a href="playListDetail.jsp?playlistId=<%=p.getPlaylistId()%>"><img src="<%=p.getImage()%>"style="width : 150px; height: 150px; margin-left:10px; margin-top:10px; border: 3px inset lightgray;"></a></td>
 				
 				<td>
-				<div style="float:right; width: 300px; text-align: left;">
-				<div style="margin-top:20px; width:200px; height: 30px;">
-				<p><%=p.getPlaylistName()%></p></div></div>
+				<div style="float:right; width: 300px; text-align: left; margin-right:100px; ">
+				<div style="background-color:white; margin-top:20px; padding-right: 20px; width:300px; height: 22px; border: 2px inset lightgray;">
+				<p style="margin-left: 30px; margin-top:1px;"><%=p.getPlaylistName()%></p></div></div>
 				</td>
 				
 				

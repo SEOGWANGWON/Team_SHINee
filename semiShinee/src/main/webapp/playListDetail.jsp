@@ -6,6 +6,9 @@
     <%@ page import = "shinee.search.SearchDAO" %>
 	<%@ page import = "shinee.search.Music_info" %>
 	<%@ page import = "shinee.search.Playlist_info" %>
+	<%@page import= "music.MusicList" %>
+	<%@page import= "music.MusicListDAO" %>
+	<%@page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,10 +73,24 @@
 			
 			<p style="text-align: center;"> 노래들 : </p>
 			<br>
+			<% 
+			String musiclistIdValue = request.getParameter("playlistId");
+			int musiclistId = Integer.parseInt(musiclistIdValue);
 			
+			MusicListDAO musiclistDAO = new MusicListDAO();
+			List<MusicList> musiclist = musiclistDAO.getAllMusiclists(musiclistId);
+			for(MusicList m: musiclist){
+				%>
+				<div><tr>
+					<th><Strong><%=m.getTitle()%></Strong>></th>
+					<th><p> - <%=m.getArtist()%></p></th>
+				</tr>
+				</div>
+				
 			
-
-
+			<%
+			}
+			%>
 
 				</article>
 			</section>
