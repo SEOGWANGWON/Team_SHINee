@@ -51,50 +51,18 @@
                 </div>
          
               
-				<%
-	//String=id 값을 가져오겠다.
-				String playlistIdValue = request.getParameter("playlistId");
-				int playlistId = Integer.parseInt(playlistIdValue);
-				
-				//String ImageValue = request.getParameter("Image");
-				//String Image = ImageValue;
-			
-				
-				//DAO작업
-				
-				PlayListDAO playlistDAO = new PlayListDAO();
-				PlayList playlist = playlistDAO.getPlaylistID(playlistId);
-				
-			%>
 			<form>
-			<h2 style="text-align: center; "><%=playlist.getPlaylistName() %> </h2>
+			<h2 style="text-align: center; "> </h2>
 			<br>
-			<img src = "<%=playlist.getImage()%>" style="width:200px; height: 200px; margin-left:42%;">
+			<img src = "" style="width:200px; height: 200px; margin-left:42%;">
 			<br>
-			<button type="button" id="UpdatePlayListButton">수정하기</button>
+			<button></button>
 			</form>
 			<br>
 			
 			<p style="text-align: center;"> 노래들 : </p>
 			<br>
-			<% 
-			String musiclistIdValue = request.getParameter("playlistId");
-			int musiclistId = Integer.parseInt(musiclistIdValue);
 			
-			MusicListDAO musiclistDAO = new MusicListDAO();
-			List<MusicList> musiclist = musiclistDAO.getAllMusiclists(musiclistId);
-			for(MusicList m: musiclist){
-				%>
-				<div><tr>
-					<th><Strong><%=m.getTitle()%></Strong>></th>
-					<th><p> <%=m.getArtist()%></p></th>
-				</tr>
-				</div>
-				
-			
-			<%
-			}
-			%>
 
 				</article>
 			</section>
@@ -127,12 +95,6 @@
 			document.getElementById("user_searchButton").addEventListener("click",()=>{
 				window.location.href = "user_search.jsp";
 			});
-			
-			document.getElementById("UpdatePlayListButton").addEventListener("click",()=>{
-				console.log("버튼 클릭됨");
-				window.location.href = "UpdatePlayList.jsp";
-			});
-			
 			</script>
 </body>
 </html>
