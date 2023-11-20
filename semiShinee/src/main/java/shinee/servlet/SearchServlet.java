@@ -1,4 +1,4 @@
-package shinee.search;
+package shinee.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -17,8 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import shinee.vo.Music_info_VO;
+
 @WebServlet("/SearchServlet")
 
+//검색하는..Servlet인데 사용하지 않을듯 일단 놔둘게요
 public class SearchServlet extends HttpServlet {
 	
 	
@@ -47,7 +50,7 @@ public class SearchServlet extends HttpServlet {
 			ResultSet resultSet = searchState.executeQuery();
 			
 			//2. 배열 만들러왓습니다 총총
-			ArrayList<Music_info> musicList = new ArrayList<>();
+			ArrayList<Music_info_VO> musicList = new ArrayList<>();
 			
 			while(resultSet.next()) {
 				
@@ -55,7 +58,7 @@ public class SearchServlet extends HttpServlet {
 				String artist_name = resultSet.getString("artist_name");
 				
 				//MusicSearch_info클래스 객체 생성
-				Music_info music_info = new Music_info(song_name, artist_name);
+				Music_info_VO music_info = new Music_info_VO(song_name, artist_name);
 
 				//1. 배열에 객체 담고싶은디 일단 배열 만들고올게용
 				//3. 만들고왓습니다 담아줄게요

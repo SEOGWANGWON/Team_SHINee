@@ -73,6 +73,53 @@
 	                  	
                         <div class="division-line"></div>
                        
+                        <!--검색결과 올라가는 곳-->
+
+                        <%
+	                        SearchDAO searchDAO = new SearchDAO();
+	                        ArrayList<Playlist_info_VO> playlistList = searchDAO.getSearchPlaylist(request.getParameter("searchText"));
+	                                              		
+	                        //검색결과 없을경우 보일 창
+	                        if(playlistList.size() == 0){
+                        %>
+								<img src="img/텅.png" style="margin-top:100px; width:250px;">
+								<script>
+									alert("검색 결과가 존재하지 않습니다");
+								</script>
+						<%
+							}
+						                        	
+							for(Playlist_info_VO p : playlistList) {
+						%>           	       
+								<div class="window" style="width: 500px; height:150px; margin-left: 350px; margin-bottom: 10px;">
+									<div class="title-bar">
+										<div class="title-bar-text">
+											playlist_info
+										</div>
+										<div class="title-bar-controls">
+											<button aria-label="Minimize"></button>
+											<button aria-label="Maximize"></button>
+											<button aria-label="Close"></button>
+										</div>
+									</div>
+									<div style="float: left; margin-left: 15px; width:100px; height: 100px; margin-top: 10px; background-color: white; box-shadow:inset;">
+										<img src="<%=p.getImage()%>" style="height: 100px;">
+									</div>
+									<div style="float:right; width: 50%; text-align: left;">
+										<div id="info_box1"><p style="margin-top:0px; margin-left:2px;">제목 : <%=p.getPlaylist_name()%></p></div>
+										<div id="info_box"><p style="margin-top:3px; margin-left:2px;"> User : <%=p.getUser_id()%></p></div>
+										<!-- 자세히 보기 버튼 누르면 해당 사용자의 플레이리스트 구경 가능 -->
+										<form action="playListDetail.jsp">
+											<input type="hidden" name="playlistId" value="<%=p.getPlaylist_id()%>">
+											<button type="submit" style="margin-top: 20px;">자세히 보기</button>
+										</form>
+										<!-- add to mine 버튼 누르면 나의 플레이리스트에 추가 가능 (기능 구현 예정) -->
+										<!-- <button style="margin-left: 10px;">add to mine</button> -->
+									</div>
+	                    		</div><!-- window -->
+						<%
+							} //for(Playlist_info_VO p : playlistList)
+						%>
                     </div>
                 </article>
             </section>

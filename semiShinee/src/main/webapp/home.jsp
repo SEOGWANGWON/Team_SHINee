@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
@@ -7,17 +6,14 @@
 		<meta charset="UTF-8">
 		<!-- 로그아웃 상태에서 처음 접속 화면 -->
 		<title>SHINee Music Home</title>
-		<link rel="stylesheet" type="text/css" href="login.css">
-        <link rel="stylesheet" type="text/css" href="all.css">
+		<link rel="stylesheet" type="text/css" href="css/login.css">
+        <link rel="stylesheet" type="text/css" href="css/all.css">
 	</head>
 	<body>
 		<%
 			//user_id 값이 존재할 경우
 			if(session.getAttribute("user_id") != null){
-		%>
-			<h3>로그인 상태에서 보일 창을 만들겟어요</h3>
-			<p>myplaylist 페이지로 자동 연결할지도</p>
-		<%
+				response.sendRedirect("MyPlaylist.jsp");
 			} else {
 				//로그아웃 상태에서 보일 페이지 내용
 		%>
@@ -72,12 +68,12 @@
 			
 			//마이페이지 버튼 누르면 이동
 			document.getElementById("gotoMyPageButton").addEventListener("click",()=>{
-				window.location.href = "myPage.jsp";
+				window.location.href = "MyPage.jsp";
 			});
 			
 			//마이플레이리스트 버튼
 			document.getElementById("gotoMyPlaylistButton").addEventListener("click",()=>{
-				window.location.href = "playList.jsp";
+				window.location.href = "MyPlaylist.jsp";
 			});
 		</script>
 	</body>

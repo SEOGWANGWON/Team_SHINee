@@ -1,6 +1,6 @@
-package shinee.search;
+package shinee.vo;
 
-public class Music_info{
+public class Music_info_VO{
 	
 	//멤버변수
 	private String song_id;
@@ -8,12 +8,13 @@ public class Music_info{
 	private String song_name;
 	private String artist_name;
 	private String genre;
+	private String album_img;
 	
 	//디폴트 생성자
-	public Music_info() {};
+	public Music_info_VO() {};
 	
 	//모든 멤버변수에 해당하는 값을 받는 생성자
-	public Music_info(String song_id, String album_id, String song_name, String artist_name, String genre) {
+	public Music_info_VO(String song_id, String album_id, String song_name, String artist_name, String genre) {
 		this.song_id = song_id;
 		this.album_id = album_id;
 		this.song_name = song_name;
@@ -22,7 +23,7 @@ public class Music_info{
 	}
 	
 	//음악 검색 정보 (2가지만) 생성자
-	public Music_info(String song_name, String artist_name) {
+	public Music_info_VO(String song_name, String artist_name) {
 		this.song_name = song_name;
 		this.artist_name = artist_name;
 	}
@@ -61,5 +62,15 @@ public class Music_info{
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
+
+	public String getAlbum_img() {
+		return album_img;
+	}
+
+	public void setAlbum_img(String album_img) {
+		this.album_img = album_img;
+	}
+	
+	
 	
 }

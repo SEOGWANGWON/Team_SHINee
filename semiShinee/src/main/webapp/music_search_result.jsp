@@ -2,10 +2,11 @@
     
 <%
     request.setCharacterEncoding("UTF-8");
-%>
+    %>
     
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "shinee.dao.SearchDAO" %>
+<%@ page import = "shinee.dao.Insert_music_toPlaylist_DAO" %>
 <%@ page import = "shinee.vo.Music_info_VO" %>
 <%@ page import = "shinee.vo.Playlist_info_VO" %>
 <!DOCTYPE html>
@@ -16,22 +17,9 @@
         <link rel="stylesheet" type="text/css" href="css/search.css">
         <link rel="stylesheet" type="text/css" href="css/all.css">
         <style>
-        	#info_box1{
-        		background-color:white; 
-        		margin-top:10px; 
-        		padding-right: 20px; 
-        		width:200px; 
-        		height: 22px; 
-        		border: 2px inset lightgray;
-        	}
-        	#info_box{
-        		background-color:white; 
-        		margin-top:15px; 
-        		padding-right: 20px; 
-        		width:200px; 
-        		height: 22px; 
-        		border: 2px inset lightgray;
-        	}
+        	/*#playlistArea{
+        		display: block;
+        	}*/
         </style>
     </head>
     <body>
@@ -65,14 +53,75 @@
                     <div style="margin-top: 60px; text-align: center;">
                         <img src="img/샤이니로고.png" alt="샤이니뮤직로고" style="width:150px;">
                         
-                       	<form method="post" name="search" action="playlist_search_result.jsp">
+                       	<form name="search" action="music_search_result.jsp" method="post"> <!-- method="post" -->
 			                <input type="text"
-			                    placeholder="플레이리스트 검색" id= "searchText" name="searchText" maxlength="100">
+			                    placeholder="노래제목/가수 검색" id= "searchText" name="searchText" minlength="2" maxlength="100"><!-- 최소 2글자 이상 -->
 			                <button type="submit">검색</button>
 	                  	</form>
 	                  	
                         <div class="division-line"></div>
                        
+                        <!--검색결과 올라가는 곳-->
+
+                        <%
+                        	
+                        	//음악 검색 결과를 playlist에 담기 위해
+	                        Insert_music_toPlaylist_DAO insertDAO = new Insert_music_toPlaylist_DAO();
+	                        String session_user_id = (String)session.getAttribute("user_id");
+	                        ArrayList<Playlist_info_VO> myplaylists = insertDAO.getAllPlaylist(session_user_id);
+	                        
+	                        //검색기능
+	                        String searchText = request.getParameter("searchText");                                                                        	
+	                        SearchDAO searchDAO = new SearchDAO();
+	                        ArrayList<Music_info_VO> musicList = searchDAO.getSearchMusics(searchText);
+	                                                                                                	
+	                                                                                                	
+	                        //검색결과 없을경우 보일 창
+	                        if(musicList.size() == 0){
+                        %>
+								<img src="img/텅.png" style="margin-top:100px; width:250px;">
+								<p>검색 결과가 존재하지 않습니다.</p>
+								<script>
+									alert("검색 결과가 존재하지 않습니다");
+								</script>
+						<%
+							}
+						%>
+                        	
+                        <%
+                        	for(Music_info_VO m : musicList) {
+                        %>           	        
+								<div class="window" style="width: 500px; height:150px; margin-left: 350px; margin-bottom: 10px;">
+									<div class="title-bar">
+										<div class="title-bar-text">
+											music_info
+										</div>
+										<div class="title-bar-controls">
+											<button type="button" aria-label="Minimize"></button>
+											<button type="button" aria-label="Maximize"></button>
+											<button type="button" aria-label="Close"></button>
+										</div>
+									</div>
+									<div style="float: left; margin-left: 15px; width:100px; height: 100px; margin-top: 10px; background-color: white; box-shadow:inset;">
+										<img src="<%=m.getAlbum_img()%>" alt="앨범이미지" style="height: 100px; width:100px;">
+									</div>
+									<div style="float:right; width: 50%; text-align: left;">
+										<div style="margin-top:20px; width:150px; height: 30px;"><p>제목 : <%=m.getSong_name()%></p></div>
+										<div><p>가수 : <%=m.getArtist_name()%></p></div>
+										<!-- add to myPlaylist를 누르면 music_add.jsp로 값 전달 -->
+										<form action="music_add.jsp">
+											<input type="hidden" name="song_id" value="<%=m.getSong_id()%>">
+											<button id="addMusicButton" type="submit" style="margin-top: 5px;">add to myPlaylist</button>
+										</form>
+									</div>
+                    			</div><!-- div class="window" -->
+                    		
+						<%
+							} //for(Music_info m : musicList)	
+							
+						%>
+							
+						
                     </div>
                 </article>
             </section>
@@ -106,6 +155,7 @@
 			document.getElementById("user_searchButton").addEventListener("click",()=>{
 				window.location.href = "user_search.jsp";
 			});
+			
         </script>
     </body>
 </html>

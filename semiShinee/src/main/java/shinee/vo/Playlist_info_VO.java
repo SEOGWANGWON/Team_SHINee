@@ -1,25 +1,28 @@
-package shinee.search;
+package shinee.vo;
 
-import java.util.Date;
-
-public class Playlist_info {
+public class Playlist_info_VO {
 
 	//멤버변수
 	int playlist_id;
 	String user_id;
 	String playlist_name;
-	Date create_date;
+	String image;
 	
-	//생성자
-	public Playlist_info() {}
+	//디폴트 생성자
+	public Playlist_info_VO() {}
 	
 	//플레이리스트 검색 생성자
-	public Playlist_info(String user_id, String playlist_name, Date create_date) {
+	public Playlist_info_VO(String user_id, String playlist_name) {
 		this.user_id = user_id;
 		this.playlist_name = playlist_name;
-		this.create_date = create_date;
 	}
 
+	public Playlist_info_VO(int playlist_id, String playlist_name, String user_id ,String image) {
+		this.playlist_id = playlist_id;
+		this.playlist_name = playlist_name;
+		this.user_id = user_id;
+		this.image = image;
+	}
 	
 	//Getter----------------------------------
 	
@@ -35,9 +38,6 @@ public class Playlist_info {
 		return playlist_name;
 	}
 
-	public Date getCreate_date() {
-		return create_date;
-	}
 
 	//Setter----------------------------------
 	
@@ -53,9 +53,14 @@ public class Playlist_info {
 		this.playlist_name = playlist_name;
 	}
 
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
+	public String getImage() {
+		return image;
 	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	
 	
 }

@@ -1,10 +1,11 @@
-package shinee.search;
+package shinee.servlet;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
- 
+
+//사진 집어넣는 class (null값 오류뜨면 쓰세요)
 public class BlobTest {
  
     public static void main(String[] args) {
@@ -23,15 +24,15 @@ public class BlobTest {
             con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
                     "shinee","shinee");
             
-            File f = new File("C://Users//user1//Desktop/단하나토마스.jpeg");    
+            File f = new File("C://Users//나세희//Desktop/고자.jpg");    
             FileInputStream fis = new FileInputStream(f);
             
             stmt = con.prepareStatement(
             		//update 테이블명 set 업데이트컬럼명 = 업데이트할 값 where 조건
-                    "UPDATE user_info SET profile_img=? WHERE user_id=?");
+                    "UPDATE user_info SET profile_img=? WHERE user_name=?");
            
             stmt.setBinaryStream(1, fis,(int)f.length());
-            stmt.setString(2, "tjrhkd");
+            stmt.setString(2, "서광원");
             //stmt.setString(2, "나세희");
             //stmt.setString(3, "칸쵸");
             //stmt.setString(4, "kh123456!");

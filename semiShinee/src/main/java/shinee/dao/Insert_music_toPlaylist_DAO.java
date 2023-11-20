@@ -1,4 +1,4 @@
-package shinee.insert;
+package shinee.dao;
 
 import java.sql.Blob;
 import java.sql.Connection;
@@ -8,12 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import shinee.search.Music_info;
-import shinee.search.Playlist_info;
-import shinee.search.Playlist_music_info;
-import shinee.search.User_info;
+import shinee.vo.Music_info_VO;
+import shinee.vo.Playlist_info_VO;
 
-public class InsertDAO {
+//플레이리스트 내에 음악을 추가하기 위한 DAO파일입니다
+public class Insert_music_toPlaylist_DAO {
 	
 	private static final String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String jbdcUsername = "shinee";
@@ -22,15 +21,13 @@ public class InsertDAO {
 	Connection connection = null;
 
 	//플레이리스트id 입력받고, 해당목록에 추가하는...메서드
-	public Music_info insertMusictoPlaylist(int playlist_id, String song_id) {
-		
-		String searchSQL = null;
+	public Music_info_VO insertMusictoPlaylist(int playlist_id, String song_id) {
 
 		Connection connection = null;
 		PreparedStatement insertState = null;
 		ResultSet resultSet = null;
 		
-		String insertSQL = "INSERT INTO playlist_music VALUES(?,?)";
+		String insertSQL = "INSERT INTO playlist_song VALUES(?,?)";
 		
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
@@ -55,7 +52,7 @@ public class InsertDAO {
 	}
 	
 	//유저 id로 유저의 전체 플레이리스트 조회 메서드
-	public ArrayList<Playlist_info> getAllPlaylist(String user_id){
+	public ArrayList<Playlist_info_VO> getAllPlaylist(String user_id){
 		
 		String searchSQL = null;
 
@@ -64,7 +61,7 @@ public class InsertDAO {
 		ResultSet resultSet = null;
 		
 		//2. 배열 만들러왓습니다 총총
-		ArrayList<Playlist_info> myplaylists = new ArrayList<>();
+		ArrayList<Playlist_info_VO> myplaylists = new ArrayList<>();
 		
 		try {
 			
@@ -82,7 +79,7 @@ public class InsertDAO {
 			
 			while(resultSet.next()) {
 				
-				Playlist_info playlist_info = new Playlist_info();
+				Playlist_info_VO playlist_info = new Playlist_info_VO();
 				
 				playlist_info.setPlaylist_id(resultSet.getInt("playlist_id"));
 				playlist_info.setPlaylist_name(resultSet.getString("playlist_name"));
